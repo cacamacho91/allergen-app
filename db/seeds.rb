@@ -1,7 +1,53 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+Recipe.destroy_all
+RecipeIngredient.destroy_all
+Ingredient.destroy_all
+IngredientAllergen.destroy_all
+Allergen.destroy_all
+UserAllergen.destroy_all
+
+users = [
+  {name: "Jake"},
+  {name: "Chris"},
+  {name: "Heston"}
+]
+User.create(users)
+
+recipes = [
+  {title: "Lasagne", user: User.second, servings: 4},
+  {title: "Jakes Jumbalaya", user: User.first, servings: 2},
+  {title: "Tortillini", user: User.first, servings: 1},
+  {title: "Heston's Hot Dawwgs", user: User.third, servings: 4}
+]
+Recipe.create(recipes)
+
+ingredients = [
+  {name: "Pasta", calories: 300, unit: "g", unit_amount: 500},
+  {name: "Tomatoes", calories: 50, unit: "g", unit_amount: 25},
+  {name: "Basil", calories: 300, unit: "g", unit_amount: 500},
+  {name: "Meat", calories: 300, unit: "g", unit_amount: 500},
+  {name: "Cheese", calories: 200, unit: "g", unit_amount: 75},
+  {name: "Butter", calories: 400, unit: "g", unit_amount: 200}
+]
+Ingredient.create(ingredients)
+
+allergens = [
+  {name: "gluten"},
+  {name: "dairy"},
+  {name: "meat"}
+]
+Allergen.create(allergens)
+
+Recipe.first.ingredients << [Ingredient.first, Ingredient.second, Ingredient.third, Ingredient.fourth, Ingredient.fifth]
+Recipe.second.ingredients << [Ingredient.second, Ingredient.third, Ingredient.fourth, Ingredient.fifth, Ingredient.find_by(name: "Butter")]
+Recipe.third.ingredients << [Ingredient.first, Ingredient.second, Ingredient.third, Ingredient.fifth]
+Recipe.fourth.ingredients << [Ingredient.fourth, Ingredient.fifth]
+
+User.first.allergens << Allergen.second
+User.second.allergens << Allergen.first
+User.third.allergens << Allergen.third
+
+Ingredient.first.allergens << Allergen.first
+Ingredient.fourth.allergens << Allergen.third
+Ingredient.fifth.allergens << Allergen.second
+Ingredient.find_by(name: "Butter").allergens << Allergen.second
