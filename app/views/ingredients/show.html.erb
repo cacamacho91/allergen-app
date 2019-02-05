@@ -1,0 +1,11 @@
+<h1> <%= @ingredient.name %> </h1>
+
+<h2>I am in these recipes:</h2>
+
+<ul>
+  <% @ingredient.recipes.each do |recipe| %>
+  <li>
+    <%= link_to recipe.title, recipe_path(recipe) %>
+  </li>
+  <% end %>
+</ul>

@@ -45,6 +45,7 @@ Recipe.fourth.ingredients << [Ingredient.fourth, Ingredient.fifth]
 
 User.first.allergens << Allergen.second
 User.second.allergens << Allergen.first
+User.second.allergens << Allergen.second
 User.third.allergens << Allergen.third
 
 Ingredient.first.allergens << Allergen.first

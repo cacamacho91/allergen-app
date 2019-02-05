@@ -1,0 +1,22 @@
+<h1> 🍴 Recipes 🍴 </h1>
+
+<% if params[:sort] == "desc" %>
+  <button>
+    <%= link_to "Sort by Ingredient # ⬆️", "#{recipes_path}?sort=asc" %>
+    <% @recipes = @recipes.sort { |recipe|  recipe.ingredients.count }.reverse %>
+  </button>
+<% else %>
+  <button>
+    <%= link_to "Sort by Ingredient # ⬇️", "#{recipes_path}?sort=desc" %>
+    <% @recipes = @recipes.sort { |recipe|  recipe.ingredients.count } %>
+  </button>
+<% end %>
+
+
+<ul>
+  <% @recipes.each do |recipe| %>
+  <li>
+    <%= link_to "#{recipe.title} - (#{recipe.ingredients.count})", recipe_path(recipe) %>
+  </li>
+  <% end %>
+</ul>

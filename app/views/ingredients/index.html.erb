@@ -1,0 +1,21 @@
+<h1> 🍎 Ingredients 🍎 </h1>
+
+<% if params[:sort] == "desc" %>
+  <button>
+    <%= link_to "Sort by Allergen # ⬆️", "#{ingredients_path}?sort=asc" %>
+    <% @ingredients = @ingredients.sort { |ing|  ing.allergic_to_me.count }.reverse %>
+  </button>
+<% else %>
+  <button>
+    <%= link_to "Sort by Allergen # ⬇️", "#{ingredients_path}?sort=desc" %>
+    <% @ingredients = @ingredients.sort { |ing|  ing.allergic_to_me.count } %>
+  </button>
+<% end %>
+
+<ul>
+  <% @ingredients.each do |ing| %>
+  <li>
+    <%= link_to "#{ing.name} - (#{ing.allergic_to_me.count})", ingredient_path(ing) %>
+  </li>
+  <% end %>
+</ul>

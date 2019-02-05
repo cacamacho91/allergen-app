@@ -1,0 +1,14 @@
+<h1> <%= @user.name %> </h1>
+
+<h2>I have authored these recipes:</h2>
+
+<ul>
+  <% @user.recipes.each do |recipe| %>
+  <li>
+    <%= link_to recipe.title, recipe_path(recipe) %>
+    <button>
+      <%= link_to "delete", recipe_path(recipe), method: :delete %>
+    </button>
+  </li>
+  <% end %>
+</ul>
